@@ -1,0 +1,114 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 7rem 2rem 3rem;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.sparkleGroup {
+  position: relative;
+  height: 50px;
+  width: 200px;
+  margin-bottom: 0.5rem;
+}
+
+.sparkle1,
+.sparkle2,
+.sparkle3 {
+  position: absolute;
+  color: var(--color-accent);
+  opacity: 0.8;
+  animation: bounce 4.5s ease-in-out infinite;
+}
+
+.sparkle1 {
+  width: 18px;
+  height: 18px;
+  top: 10px;
+  left: 30px;
+  animation-delay: 0s;
+}
+
+.sparkle2 {
+  width: 14px;
+  height: 14px;
+  top: 0;
+  left: 90px;
+  animation-delay: 1s;
+}
+
+.sparkle3 {
+  width: 16px;
+  height: 16px;
+  top: 20px;
+  right: 35px;
+  animation-delay: 2s;
+}
+
+.title {
+  font-size: 2.8rem;
+  font-weight: 400;
+  color: var(--color-primary);
+  margin: 0;
+  text-align: center;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 5rem 1.5rem 2rem;
+  }
+  
+  .title {
+    font-size: 2.2rem;
+  }
+  
+  .sparkleGroup {
+    width: 160px;
+    height: 40px;
+  }
+  
+  .sparkle1 {
+    width: 14px;
+    height: 14px;
+    left: 20px;
+    top: 8px;
+  }
+  
+  .sparkle2 {
+    width: 12px;
+    height: 12px;
+    left: 70px;
+    top: 0;
+  }
+  
+  .sparkle3 {
+    width: 14px;
+    height: 14px;
+    right: 25px;
+    top: 15px;
+  }
+}
+
