@@ -1,0 +1,82 @@
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+}
+
+.cursorFollower {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+  opacity: 0;
+  transition: opacity 0.6s ease-out;
+  z-index: 1;
+}
+
+.cursorFollower.ready {
+  opacity: 1;
+}
+
+.followerDark {
+  background: radial-gradient(
+    circle at center,
+    rgba(56, 58, 64, 0.8) 0%,     
+    rgba(56, 58, 64, 0.5) 40%,
+    rgba(56, 58, 64, 0.2) 70%,
+    transparent 100%
+  );
+}
+
+.glass {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.noise {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.03) 2px,
+      rgba(255, 255, 255, 0.03) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.03) 2px,
+      rgba(255, 255, 255, 0.03) 4px
+    );
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+}
