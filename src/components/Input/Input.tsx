@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import { setInputValue, clearInputValue } from '../../store/slices/inputSlice';
+import { sendMessageToAI } from '../../utilits/api';
 import styles from './Input.module.css';
 
 const SendIcon = () => (
@@ -24,20 +26,31 @@ const SendIcon = () => (
 const Input = () => {
   const dispatch = useAppDispatch();
   const value = useAppSelector((state) => state.input.value);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setInputValue(e.target.value));
   };
 
-  const handleSend = () => {
-    if (value.trim() !== '') {
-      console.log(value);
+  const handleSend = async () => {
+    if (value.trim() !== '' && !isLoading) {
+      const userMessage = value;
       dispatch(clearInputValue());
+      setIsLoading(true);
+
+      try {
+        const response = await sendMessageToAI(userMessage);
+        console.log('Ответ от AI:', response);
+      } catch (error) {
+        console.error('Ошибка:', error);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && value.trim() !== '') {
+    if (e.key === 'Enter' && value.trim() !== '' && !isLoading) {
       handleSend();
     }
   };
@@ -52,8 +65,14 @@ const Input = () => {
           value={value}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
+          disabled={isLoading}
         />
-        <button className={styles.sendButton} aria-label="Send message" onClick={handleSend}>
+        <button 
+          className={styles.sendButton} 
+          aria-label="Send message" 
+          onClick={handleSend}
+          disabled={isLoading}
+        >
           <SendIcon />
         </button>
       </div>
