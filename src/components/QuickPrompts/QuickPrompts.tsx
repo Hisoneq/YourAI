@@ -1,3 +1,5 @@
+import { useAppDispatch } from '../../hooks/useRedux';
+import { setInputValue } from '../../store/slices/inputSlice';
 import styles from './QuickPrompts.module.css';
 
 const prompts = [
@@ -7,6 +9,12 @@ const prompts = [
 ];
 
 export default function QuickPrompts() {
+  const dispatch = useAppDispatch();
+
+  const handleClick = (prompt: string) => {
+    dispatch(setInputValue(prompt));
+  };
+
   return (
     <div className={styles.container}>
       <p className={styles.title}>
@@ -15,7 +23,8 @@ export default function QuickPrompts() {
       
       <div className={styles.promptsGrid}>
         {prompts.map((prompt, index) => (
-          <button 
+          <button
+            onClick={() => handleClick(prompt)}
             key={index} 
             className={styles.promptCard}
           >

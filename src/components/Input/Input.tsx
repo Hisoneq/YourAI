@@ -1,3 +1,5 @@
+import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
+import { setInputValue, clearInputValue } from '../../store/slices/inputSlice';
 import styles from './Input.module.css';
 
 const SendIcon = () => (
@@ -20,6 +22,26 @@ const SendIcon = () => (
 );
 
 const Input = () => {
+  const dispatch = useAppDispatch();
+  const value = useAppSelector((state) => state.input.value);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setInputValue(e.target.value));
+  };
+
+  const handleSend = () => {
+    if (value.trim() !== '') {
+      console.log(value);
+      dispatch(clearInputValue());
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && value.trim() !== '') {
+      handleSend();
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.inputWrapper}>
@@ -27,8 +49,11 @@ const Input = () => {
           type="text" 
           placeholder="Ask me anything..."
           className={styles.input}
+          value={value}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
         />
-        <button className={styles.sendButton} aria-label="Send message">
+        <button className={styles.sendButton} aria-label="Send message" onClick={handleSend}>
           <SendIcon />
         </button>
       </div>
