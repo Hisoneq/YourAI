@@ -28,7 +28,6 @@
   scroll-behavior: smooth;
 }
 
-/* Typing indicator */
 .typingIndicator {
   align-self: flex-start;
   background: var(--color-bg-glass);
