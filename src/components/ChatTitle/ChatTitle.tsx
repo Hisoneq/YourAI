@@ -14,9 +14,13 @@ const SparkleIcon = ({ className }: { className: string }) => (
   </svg>
 );
 
-const ChatTitle = () => {
+interface ChatTitleProps {
+  isVisible?: boolean;
+}
+
+const ChatTitle = ({ isVisible = true }: ChatTitleProps) => {
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${!isVisible ? styles.hidden : ''}`}>
       <div className={styles.sparkleGroup}>
         <SparkleIcon className={styles.sparkle1} />
         <SparkleIcon className={styles.sparkle2} />
