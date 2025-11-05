@@ -4,6 +4,14 @@
   align-items: center;
   padding: 7rem 2rem 3rem;
   animation: fadeInUp 0.8s ease-out;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.container.hidden {
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
 }
 
 .sparkleGroup {

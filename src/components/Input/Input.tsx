@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import { setInputValue, clearInputValue } from '../../store/slices/inputSlice';
+import { addMessage, setLoading } from '../../store/slices/messagesSlice';
 import { sendMessageToAI } from '../../utilits/api';
 import styles from './Input.module.css';
 
@@ -31,7 +31,7 @@ interface InputProps {
 const Input = ({ onSendMessage}: InputProps) => {
   const dispatch = useAppDispatch();
   const value = useAppSelector((state) => state.input.value);
-  const [isLoading, setIsLoading] = useState(false);
+  const isLoading = useAppSelector((state) => state.messages.isLoading);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setInputValue(e.target.value));
@@ -40,17 +40,28 @@ const Input = ({ onSendMessage}: InputProps) => {
   const handleSend = async () => {
     if (value.trim() !== '' && !isLoading) {
       const userMessage = value;
+      
+      // Добавляем user message в store
+      dispatch(addMessage({ role: 'user', content: userMessage }));
       dispatch(clearInputValue());
-      onSendMessage?.()
-      setIsLoading(true);
+      onSendMessage?.();
+      
+      // Ставим loading
+      dispatch(setLoading(true));
 
       try {
         const response = await sendMessageToAI(userMessage);
-        console.log('Ответ от AI:', response);
+        
+        // Добавляем AI response в store
+        dispatch(addMessage({ role: 'assistant', content: response }));
       } catch (error) {
         console.error('Ошибка:', error);
+        dispatch(addMessage({ 
+          role: 'assistant', 
+          content: 'Sorry, something went wrong. Please try again.' 
+        }));
       } finally {
-        setIsLoading(false);
+        dispatch(setLoading(false));
       }
     }
   };

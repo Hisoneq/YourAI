@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import inputReducer from './slices/inputSlice';
+import messagesReducer from './slices/messagesSlice';
 
 export const store = configureStore({
   reducer: {
-    input: inputReducer
+    input: inputReducer,
+    messages: messagesReducer
   }
 });
 
