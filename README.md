@@ -2,6 +2,11 @@
 
 Минималистичный AI-чат с glassmorphism эффектами и интерактивным фоном.
 
+## Скриншоты
+
+![Главный экран](screenshots/main.png)
+![Чат](screenshots/chat.png)
+
 ## Технологии
 
 - React 18 + TypeScript
