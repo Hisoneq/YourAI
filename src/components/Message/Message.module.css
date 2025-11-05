@@ -1,0 +1,55 @@
+.message {
+  max-width: 75%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.75rem;
+  border-radius: 16px;
+  word-wrap: break-word;
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.content {
+  margin: 0;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+/* User message - справа, темный фон */
+.message.user {
+  align-self: flex-end;
+  background: var(--color-accent);
+  color: var(--color-bg-primary);
+  border-bottom-right-radius: 4px;
+  margin-left: auto;
+}
+
+/* AI message - слева, glass эффект */
+.message.assistant {
+  align-self: flex-start;
+  background: var(--color-bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: var(--color-primary);
+  border-bottom-left-radius: 4px;
+  margin-right: auto;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .message {
+    max-width: 85%;
+    padding: 0.65rem 0.9rem;
+    font-size: 0.9rem;
+  }
+}
+

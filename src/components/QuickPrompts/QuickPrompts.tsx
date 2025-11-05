@@ -12,7 +12,7 @@ interface QuickPromptsProps {
   isVisible?: boolean;
 }
 
-export default function QuickPrompts({isVisible = true }: QuickPromptsProps) {
+export default function QuickPrompts({ isVisible = true }: QuickPromptsProps) {
   const dispatch = useAppDispatch();
 
   const handleClick = (prompt: string) => {
