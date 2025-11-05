@@ -23,7 +23,12 @@ const SendIcon = () => (
   </svg>
 );
 
-const Input = () => {
+interface InputProps {
+  onSendMessage?: () => void;
+  onNewChat?: () => void;
+}
+
+const Input = ({ onSendMessage}: InputProps) => {
   const dispatch = useAppDispatch();
   const value = useAppSelector((state) => state.input.value);
   const [isLoading, setIsLoading] = useState(false);
@@ -36,6 +41,7 @@ const Input = () => {
     if (value.trim() !== '' && !isLoading) {
       const userMessage = value;
       dispatch(clearInputValue());
+      onSendMessage?.()
       setIsLoading(true);
 
       try {

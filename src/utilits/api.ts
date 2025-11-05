@@ -28,7 +28,6 @@ export const sendMessageToAI = async (message: string): Promise<string> => {
     }
 
     const data = await response.json();
-    console.log('API Response:', data);
 
     if (data.choices && data.choices[0] && data.choices[0].message) {
       return data.choices[0].message.content;

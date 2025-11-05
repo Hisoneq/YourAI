@@ -8,11 +8,16 @@ const prompts = [
   "What projects should I be concerned about right now?"
 ];
 
-export default function QuickPrompts() {
+interface QuickPromptsProps {
+  onPromptSelect?: () => void;
+}
+
+export default function QuickPrompts({ onPromptSelect }: QuickPromptsProps) {
   const dispatch = useAppDispatch();
 
   const handleClick = (prompt: string) => {
     dispatch(setInputValue(prompt));
+    onPromptSelect?.();
   };
 
   return (
