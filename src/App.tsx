@@ -14,7 +14,7 @@ function App() {
 
       {isChatStarted && <ChatWindow />}
 
-      <QuickPrompts onPromptSelect={startChat} isVisible={!isChatStarted} />
+      <QuickPrompts isVisible={!isChatStarted} />
 
       <Input onSendMessage={startChat} />
     </GlassBackground>

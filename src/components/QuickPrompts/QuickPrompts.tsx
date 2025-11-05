@@ -9,16 +9,14 @@ const prompts = [
 ];
 
 interface QuickPromptsProps {
-  onPromptSelect?: () => void;
   isVisible?: boolean;
 }
 
-export default function QuickPrompts({ onPromptSelect, isVisible = true }: QuickPromptsProps) {
+export default function QuickPrompts({isVisible = true }: QuickPromptsProps) {
   const dispatch = useAppDispatch();
 
   const handleClick = (prompt: string) => {
     dispatch(setInputValue(prompt));
-    onPromptSelect?.();
   };
 
   return (
